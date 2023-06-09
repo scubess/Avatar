@@ -7,7 +7,7 @@ import Combine
 import UIKit
 
 //MARK:- Combine 
-class NetworkManager: AvatarService {
+class NetworkManager: NetworkService {
     
 
     //MARK: - properties
@@ -24,9 +24,9 @@ class NetworkManager: AvatarService {
     //MARK:- Init
     private init() { }
     
-    func FetchData<T>(from urlString: String) -> Future<T, AvatarServiceError> where T : Decodable, T : Encodable {
+    func FetchData<T>(from urlString: String) -> Future<T, NetworkServiceError> where T : Decodable, T : Encodable {
         //Initialise and retturn future
-        return Future<T, AvatarServiceError> { [unowned self] promise in
+        return Future<T, NetworkServiceError> { [unowned self] promise in
             guard let url = self.createURL(with: urlString) else {
                 return promise(.failure(.urlError(URLError(.unsupportedURL))))
             }
@@ -39,7 +39,7 @@ class NetworkManager: AvatarService {
                     guard let httpResponse = response as? HTTPURLResponse,
                           200...299 ~= httpResponse.statusCode
                     else {
-                        throw AvatarServiceError.responseError((response as? HTTPURLResponse)?.statusCode ?? 500)
+                        throw NetworkServiceError.responseError((response as? HTTPURLResponse)?.statusCode ?? 500)
                     }
                     return data
                 }
@@ -57,7 +57,7 @@ class NetworkManager: AvatarService {
                             promise(.failure(.urlError(urlError)))
                         case let decodingError as DecodingError:
                             promise(.failure(.decodingError(decodingError)))
-                        case let apiError as AvatarServiceError:
+                        case let apiError as NetworkServiceError:
                           promise(.failure(apiError))
                         default:
                           promise(.failure(.anyError))

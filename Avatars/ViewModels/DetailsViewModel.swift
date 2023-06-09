@@ -99,7 +99,7 @@ class DetailViewModel: ObservableObject {
     }
     
     // MARK: - Handle errors
-    func handleError(_ apiError: AvatarServiceError) {
+    func handleError(_ apiError: NetworkServiceError) {
         print("ERROR: \(apiError.localizedDescription)!!!!!")
     }
 }

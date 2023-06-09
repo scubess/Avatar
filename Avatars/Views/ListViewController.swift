@@ -2,6 +2,15 @@
 import UIKit
 import Combine
 
+/**
+    NOTE: In the main controller we need a small note describing what You did and why in this way.
+    1. Simple MVVM Architecture is good to cover the points in the test
+    2. Protocol Based approach can be also useful to keep SOLID principle - Single responsibility
+    3. Avoid Segue - as it breaks the rule. but left it unchanged to assume refactoring a big project.
+    4. Test cases covered Model, View and also ImageDownloader
+    5. List view resemble's tableview Controller and tableviewcell. It is not that hard to refactor to it.
+        So I assume the design will change to collectionview.
+ */
 
 protocol ListViewControllerDelegate: AnyObject {
     func sendUserDetail(data: GitUser)

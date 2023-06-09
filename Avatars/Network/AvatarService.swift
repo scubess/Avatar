@@ -6,7 +6,7 @@ import Foundation
 import Combine
 import UIKit
 
-enum AvatarServiceError: Error, LocalizedError {
+enum NetworkServiceError: Error, LocalizedError {
     case urlError(URLError)
     case responseError(Int)
     case decodingError(DecodingError)
@@ -26,7 +26,7 @@ enum AvatarServiceError: Error, LocalizedError {
     }
 }
 
-protocol AvatarService {
-    func FetchData<T: Codable>(from endpoint: String) -> Future<T, AvatarServiceError>
+protocol NetworkService {
+    func FetchData<T: Codable>(from endpoint: String) -> Future<T, NetworkServiceError>
 }
 
